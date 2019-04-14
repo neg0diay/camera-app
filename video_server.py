@@ -3,7 +3,8 @@ import time
 import picamera
 
 with picamera.PiCamera() as camera:
-    camera.resolution = (640, 480)
+    # camera.resolution = (640, 480)
+    camera.resolution = (1296, 730)
     camera.framerate = 24
 
     server_socket = socket.socket()
@@ -14,7 +15,7 @@ with picamera.PiCamera() as camera:
     connection = server_socket.accept()[0].makefile('wb')
     try:
         camera.start_recording(connection, format='h264')
-        camera.wait_recording(120)
+        camera.wait_recording(600)
         camera.stop_recording()
     finally:
         connection.close()
